@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vagón de cartón</title>
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+  <script>
+    AFRAME.registerComponent("crear-vagon", {
+      init: function () {
+        const contenedor = this.el;
+
+        function caja(posicion, dimensiones, color, rotacion = "0 0 0") {
+          const pieza = document.createElement("a-box");
+          pieza.setAttribute("position", posicion);
+          pieza.setAttribute("width", dimensiones[0]);
+          pieza.setAttribute("height", dimensiones[1]);
+          pieza.setAttribute("depth", dimensiones[2]);
+          pieza.setAttribute("rotation", rotacion);
+          pieza.setAttribute("material", {
+            color: color,
+            roughness: 1,
+            metalness: 0
+          });
+          contenedor.appendChild(pieza);
+          return pieza;
+        }
+
+        // Piso de tablas de cartón, con pequeñas separaciones.
+        for (let i = 0; i < 32; i++) {
+          caja(
+            `0 0 ${3.9 - i * 0.25}`,
+            [3.6, 0.12, 0.235],
+            i % 2 === 0 ? "#B99B7E" : "#C9AD91"
+          );
+        }
+
+        // Paredes laterales con ventanas abiertas.
+        for (const lado of [-1, 1]) {
+          const x = lado * 1.8;
+          const color = lado === -1 ? "#78AD83" : "#DFA1AD";
+
+          caja(`${x} 0.6 0`, [0.12, 1.2, 8], color);
+          caja(`${x} 2.65 0`, [0.12, 0.5, 8], color);
+
+          for (let i = 0; i <= 4; i++) {
+            caja(
+              `${x} 1.8 ${-4 + i * 2}`,
+              [0.14, 1.2, 0.26],
+              color
+            );
+          }
+
+          // Marcos de cuatro ventanas por lado.
+          for (let i = 0; i < 4; i++) {
+            const z = -3 + i * 2;
+            const marco = "#B79875";
+
+            for (const altura of [1.25, 2.35]) {
+              caja(`${x} ${altura} ${z}`, [0.2, 0.1, 1.65], marco);
+            }
+
+            for (const borde of [-0.78, 0.78]) {
+              caja(
+                `${x} 1.8 ${z + borde}`,
+                [0.2, 1.2, 0.1],
+                marco
+              );
+            }
+
+            caja(`${x} 1.8 ${z}`, [0.2, 0.07, 1.6], marco);
+          }
+
+          // Bancos longitudinales orientados hacia el pasillo.
+          for (let i = 0; i < 3; i++) {
+            const z = -2.5 + i * 2.2;
+
+            caja(
+              `${lado * 1.32} 0.3 ${z}`,
+              [0.75, 0.5, 1.8],
+              color
+            );
+
+            caja(
+              `${lado * 1.32} 0.6 ${z}`,
+              [0.8, 0.16, 1.8],
+              "#E8D58F"
+            );
+
+            caja(
+              `${lado * 1.65} 1.02 ${z}`,
+              [0.12, 0.85, 1.8],
+              "#C4A586"
+            );
+
+            // Separadores de cartón entre asientos.
+            caja(
+              `${lado * 1.3} 0.85 ${z - 0.92}`,
+              [0.9, 1.1, 0.1],
+              "#BCA080"
+            );
+          }
+        }
+
+        // Pared del fondo dividida en verde y rosa.
+        caja("-1.16 1.45 -4", [1.28, 2.9, 0.14], "#70A97A");
+        caja("1.16 1.45 -4", [1.28, 2.9, 0.14], "#DDA0AB");
+        caja("0 2.65 -4", [1.04, 0.5, 0.14], "#C5AB8D");
+
+        // Puerta morada.
+        caja("0 1.2 -3.96", [0.95, 2.4, 0.12], "#A393C2");
+
+        // Ventanilla de la puerta.
+        caja("0 1.8 -3.88", [0.58, 0.75, 0.035], "#BBDCE3");
+
+        // Marco de puerta.
+        for (const x of [-0.53, 0.53]) {
+          caja(`${x} 1.22 -3.85`, [0.09, 2.44, 0.15], "#B69A78");
+        }
+        caja("0 2.44 -3.85", [1.15, 0.09, 0.15], "#B69A78");
+
+        const pomo = document.createElement("a-sphere");
+        pomo.setAttribute("position", "0.32 1.05 -3.82");
+        pomo.setAttribute("radius", "0.065");
+        pomo.setAttribute("color", "#DFBF64");
+        contenedor.appendChild(pomo);
+
+        // Ventanas decorativas del fondo.
+        for (const x of [-1.14, 1.14]) {
+          caja(`${x} 1.85 -3.88`, [0.82, 1.05, 0.12], "#B79875");
+          caja(`${x} 1.85 -3.8`, [0.62, 0.83, 0.04], "#DCEBF0");
+        }
+
+        // Techo curvo construido con segmentos.
+        const segmentos = 24;
+        const radio = 1.85;
+
+        for (let i = 0; i < segmentos; i++) {
+          const angulo = (i + 0.5) * Math.PI / segmentos;
+          const x = Math.cos(angulo) * radio;
+          const y = 2.85 + Math.sin(angulo) * radio * 0.43;
+
+          const giro = Math.atan2(
+            0.43 * Math.cos(angulo),
+            -Math.sin(angulo)
+          ) * 180 / Math.PI;
+
+          const ancho = radio * Math.PI / segmentos *
+            Math.hypot(Math.sin(angulo), 0.43 * Math.cos(angulo));
+
+          caja(
+            `${x} ${y} 0`,
+            [ancho + 0.025, 0.07, 8.15],
+            i % 2 === 0 ? "#C5B9B0" : "#BEB1A9",
+            `0 0 ${giro}`
+          );
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <a-scene cursor="rayOrigin: mouse"> 
+   <a-box position="-1.3 1 2" scale="0.4 0.4 0.4"
+     color="#ff2301" animation__click="property: position;
+      from: -1.3 1 2; to: -1.3 1.8 2; from: -1.3 1.8 2;  to: -1.3 1 2;
+      dur: 1000; startEvents: click">
+     </a-box>
+
+    <a-cone position="1.3 1 0" scale="0.2 0.4 0.2"
+     color="#1846ff" 
+      animation__click="property: position;
+      from: 1.3 1 0; to: 1.3 1.8 0; from: 1.3 1.8 0; to: 1.3 1 0;
+      dur: 1000; startEvents: click">
+    </a-cone>  
+
+    
+    <a-sphere position="-1.3 1 -2.2" scale="0.3 0.3 0.3"
+     color="#edff21"  animation__click="property: position; 
+     from: -1.3 1 -2.2; to: -1.3 1.8 -2.2; from: -1.3 1.8 -2.2; to: -1.3 1 -2.2;
+     dur: 1000; startEvents: click"> </a-sphere> 
+
+    <!-- Vagón generado con geometría sencilla -->
+    <a-entity crear-vagon></a-entity>
+
+    <!-- Iluminación -->
+    <a-light type="ambient" color="#FFF1DC" intensity="1"></a-light>
+    <a-light
+      type="point"
+      position="0 2.8 0"
+      color="#f3e6cd"
+      intensity="1.2"
+      distance="12">
+    </a-light>
+
+    <!-- Terreno exterior visible por las ventanas -->
+    <a-plane
+      rotation="-90 0 0"
+      position="0 -0.12 0"
+      width="200"
+      height="200"
+      color="#9DBD91"
+      material="roughness: 1">
+    </a-plane>   
+
+  </a-scene>
+</body>
+</html>
 
