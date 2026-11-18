@@ -14,7 +14,10 @@ Palabra: Resignificación
 
 ## 2 · Cómo se usa
 
-- Enlace a la escena: https://...
+- Enlace a la escena:
+- https://vitaljic.github.io/estacion/
+- https://vitaljic.github.io/proyecto/
+- https://vitaljic.github.io/ni-ointerior/
 - Dispositivo pensado: computador, eperanado con visor en el futuro aplicable
 - Al entrar: en esta punto solo podemos por ahora hablar de supuestos, debido a que aun he podido enlazar las diferentes interacciones unas con otras (de ahí los tres links a revisar), inicialmente el usuario en en la estación de trenes debe acercarse y cliquear el tren para entrar al vagón, la cual es otra interacción donde debe recorrer el vagón y interactuar en tres instancias en este caso identificadas con un cuadrado, un cono y una esfera cada instancia debe llevar a una integración diferente 1 construcción a través del lenguaje, Madre, reconociendo a mi niño interior, dentro de lo que se ha realizado están la instancias de la estación, el vagón y el niño interior    
 
