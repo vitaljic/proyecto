@@ -40,7 +40,7 @@
         // Paredes laterales con ventanas abiertas.
         for (const lado of [-1, 1]) {
           const x = lado * 1.8;
-          const color = lado === -1 ? "#2BCAFF" : "#2FFF2B";
+          const color = lado === -1 ? "#2BCAFF" : "#008686";
 
           caja(`${x} 0.6 0`, [0.12, 1.2, 8], color);
           caja(`${x} 2.65 0`, [0.12, 0.5, 8], color);
@@ -106,7 +106,7 @@
 
         // Pared del fondo dividida en verde y rosa.
         caja("-1.16 1.45 -4", [1.28, 2.9, 0.14], "#70A97A");
-        caja("1.16 1.45 -4", [1.28, 2.9, 0.14], "#DDA0AB");
+        caja("1.16 1.45 -4", [1.28, 2.9, 0.14], "#008686");
         caja("0 2.65 -4", [1.04, 0.5, 0.14], "#C5AB8D");
 
         // Puerta morada.
