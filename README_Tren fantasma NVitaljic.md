@@ -42,7 +42,7 @@ A nivel técnico, actualmente se trabaja con elementos construidos directamente 
 
 ## 5 · Testing
 
-Video del recorrido: https://...
+Video del recorrido: https://www.youtube.com/watch?v=TvKoihZJ4mk
 
 ### Abrir el enlace en ventana privada
 - Resultado: funciona como se espera
