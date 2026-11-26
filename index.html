@@ -218,19 +218,7 @@ dur: 200; startEvents: mouseleave"
   id="camara"
   camera
   position="0 1.6 4"
-  look-controls="pointerLockEnabled: true"
-  wasd-controls="acceleration: 15; fly: false">
-
-  <!-- Mira para hacer clic sobre objetos con clase clickeable -->
-  <a-entity
-    cursor="fuse: false; rayOrigin: entity"
-    raycaster="objects: .clickeable; far: 20"
-    position="0 0 -0.5"
-    geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"
-    material="shader: flat; color: #333333; depthTest: false">
-  </a-entity>
-
-</a-entity>
+  wasd-controls="acceleration: 10; fly: false"></a-entity> 
 
     <!-- Iluminación -->
     <a-light type="ambient" color="#FFF1DC" intensity="1"></a-light>
