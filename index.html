@@ -163,8 +163,7 @@
 </head>
 
 <body>
-  <a-scene   cursor="rayOrigin: mouse; fuse: false">
-
+  <a-scene>
   
   <a-assets>
   <a-asset-item
@@ -215,10 +214,18 @@ dur: 200; startEvents: mouseleave"
     <!-- Vagón generado con geometría sencilla -->
     <a-entity crear-vagon></a-entity>
 <a-entity
+  cursor="rayOrigin: mouse; fuse: false"
+  raycaster="objects: .clickeable; far: 20">
+</a-entity>
+
+<!-- Cámara controlada con arrastre del mouse y teclado -->
+<a-entity
   id="camara"
   camera
   position="0 1.6 4"
-  wasd-controls="acceleration: 10; fly: false"></a-entity> 
+  look-controls="pointerLockEnabled: false; mouseEnabled: true"
+  wasd-controls="acceleration: 15; fly: false">
+</a-entity>
 
     <!-- Iluminación -->
     <a-light type="ambient" color="#FFF1DC" intensity="1"></a-light>
