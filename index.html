@@ -227,6 +227,25 @@ dur: 200; startEvents: mouseleave"
       material="roughness: 1">
     </a-plane>   
 
+    <!-- Mira central -->
+  <a-entity
+    cursor="fuse: false; rayOrigin: entity"
+    raycaster="objects: .clickeable; far: 8"
+    position="0 0 -0.5"
+    geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"
+    material="shader: flat; color: #333333; depthTest: false"
+    animation__entrar="
+      property: material.color;
+      startEvents: mouseenter;
+      to: #FFB300;
+      dur: 100"
+    animation__salir="
+      property: material.color;
+      startEvents: mouseleave;
+      to: #333333;
+      dur: 100">
+  </a-entity>
+
   </a-scene>
 </body>
 </html>
