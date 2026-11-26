@@ -206,25 +206,12 @@ dur: 200; startEvents: mouseleave"
 
     <!-- Vagón generado con geometría sencilla -->
     <a-entity crear-vagon></a-entity>
-
-     <!-- Mira central -->
-  <a-entity
-    cursor="fuse: false; rayOrigin: entity"
-    raycaster="objects: .clickeable; far: 8"
-    position="0 0 -0.5"
-    geometry="primitive: ring; radiusInner: 0.003; radiusOuter: 0.005"
-    material="shader: flat; color: #333333; depthTest: false"
-    animation__entrar="
-      property: material.color;
-      startEvents: mouseenter;
-      to: #FFB300;
-      dur: 100"
-    animation__salir="
-      property: material.color;
-      startEvents: mouseleave;
-      to: #333333;
-      dur: 100">
-  </a-entity>
+<a-entity
+  id="camara"
+  camera
+  position="0 1.6 4"
+  look-controls="pointerLockEnabled: true"
+  wasd-controls="acceleration: 15; fly: false">  
 
     <!-- Iluminación -->
     <a-light type="ambient" color="#FFF1DC" intensity="1"></a-light>
