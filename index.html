@@ -169,17 +169,19 @@
   <a-assets>
   <a-asset-item
     id="oso 3"
-    class="clickeable"
+    
     src="activos/oso 3.glb">
   </a-asset-item>
-  <a-asset-item id="mochila 2" class="clickeable" src="activos/mochila 2.glb"></a-asset-item>
-  <a-asset-item id="foto 1" class="clickeable" src="activos/foto 1.glb"></a-asset-item>
+  <a-asset-item id="mochila 2" src="activos/mochila 2.glb"></a-asset-item>
+  <a-asset-item id="foto 1" src="activos/foto 1.glb"></a-asset-item>
 
   
 </a-assets>
 
    <a-entity
-  gltf-model="#oso 3" animation__enter="property: position; to: -1.3 1.3 1.3;
+  gltf-model="#oso 3"
+  class="clickeable" 
+  animation__enter="property: position; to: -1.3 1.3 1.3;
 dur: 200; startEvents: mouseenter"
 animation__leave="property: position; to: -1.3 1 1.3;
 dur: 200; startEvents: mouseleave"
@@ -189,7 +191,9 @@ dur: 200; startEvents: mouseleave"
 </a-entity>  
 
      <a-entity
-  gltf-model="#mochila 2" animation__enter="property: position; to: 1.3 1.3 -0.6;
+  gltf-model="#mochila 2" 
+  class="clickeable"
+  animation__enter="property: position; to: 1.3 1.3 -0.6;
 dur: 200; startEvents: mouseenter"
 animation__leave="property: position; to: 1.3 1 -0.6;
 dur: 200; startEvents: mouseleave"
@@ -198,7 +202,9 @@ dur: 200; startEvents: mouseleave"
 </a-entity>  
 
        <a-entity
-  gltf-model="#foto 1" animation__enter="property: position; to: -1.3 1.3 -3;
+  gltf-model="#foto 1" 
+  class="clickeable"
+  animation__enter="property: position; to: -1.3 1.3 -3;
 dur: 200; startEvents: mouseenter"
 animation__leave="property: position; to: -1.3 1 -3;
 dur: 200; startEvents: mouseleave"
