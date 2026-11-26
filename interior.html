@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Un espacio para sentir</title>
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+  <script>
+    // Líneas sutiles para sugerir cartón corrugado.
+    AFRAME.registerComponent("suelo-carton", {
+      init: function () {
+        const geometria = new THREE.BufferGeometry();
+        const puntos = [];
+
+        for (let x = -20; x <= 20; x += 0.08) {
+          puntos.push(x, 0.003, -30, x, 0.003, 20);
+        }
+
+        geometria.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(puntos, 3)
+        );
+
+        const material = new THREE.LineBasicMaterial({
+          color: "#c9c7cc",
+          transparent: true,
+          opacity: 0.12
+        });
+
+        this.el.setObject3D(
+          "corrugado",
+          new THREE.LineSegments(geometria, material)
+        );
+      },
+
+      remove: function () {
+        const lineas = this.el.getObject3D("corrugado");
+        if (lineas) {
+          lineas.geometry.dispose();
+          lineas.material.dispose();
+          this.el.removeObject3D("corrugado");
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+   <a-scene
+    cursor="rayOrigin: mouse; fuse: false"
+  raycaster="objects: .clickeable"
+    background="color: #F2F1F6"
+    fog="type: linear; color: #F2F1F6; near: 10; far: 35"
+    shadow="type: pcfsoft"
+    renderer="antialias: true">
+
+    <a-assets>
+      <a-mixin
+        id="carton"
+        material="color: #973BA1; roughness: 1; metalness: 0"
+        shadow="cast: true; receive: true">
+      </a-mixin>
+
+      <a-mixin
+        id="canto"
+        material="color: #A13B78; roughness: 1">
+      </a-mixin>
+    </a-assets>
+
+    <!-- Espacio blanco amplio -->
+    <a-plane
+      rotation="-90 0 0"
+      width="80"
+      height="80"
+      color="#F2F1F5"
+      material="roughness: 1"
+      shadow="receive: true">
+    </a-plane>
+
+    <a-entity suelo-carton></a-entity>
+
+    <!-- Uniones entre grandes láminas del suelo -->
+    <a-box
+      position="0 0.004 1.5"
+      width="40"
+      height="0.006"
+      depth="0.015"
+      color="#D7D4DA">
+    </a-box>
+
+    <a-box
+      position="4 0.004 -5"
+      width="0.015"
+      height="0.006"
+      depth="40"
+      color="#DDDADF">
+    </a-box>
+
+    <!-- Figura sentada: mira hacia el fondo, de espaldas a la cámara -->
+    <a-entity id="figura" position="0 0 -2" rotation="0 -20 0">
+
+      <!-- Cadera -->
+      <a-box
+        mixin="carton"
+        position="0 0.24 0"
+        width="0.58" height="0.4" depth="0.48">
+      </a-box>
+
+      <!-- Torso inclinado hacia las rodillas -->
+      <a-box
+        mixin="carton"
+        position="0 0.65 -0.08"
+        rotation="-14 0 0"
+        width="0.58" height="0.68" depth="0.32">
+      </a-box>
+
+      <!-- Cabeza facetada e inclinada -->
+      <a-entity position="0 1.05 -0.25" rotation="-30 0 0">
+        <a-sphere
+          mixin="carton"
+          radius="0.24"
+          scale="0.83 1.1 0.9"
+          segments-width="10"
+          segments-height="8">
+        </a-sphere>
+      </a-entity>
+
+      <!-- Piernas recogidas -->
+      <a-box
+        mixin="carton"
+        position="-0.19 0.43 -0.45"
+        rotation="-22 0 0"
+        width="0.23" height="0.67" depth="0.25">
+      </a-box>
+
+      <a-box
+        mixin="carton"
+        position="0.19 0.43 -0.45"
+        rotation="-22 0 0"
+        width="0.23" height="0.67" depth="0.25">
+      </a-box>
+
+      <!-- Pies -->
+      <a-box
+        mixin="carton"
+        position="-0.19 0.1 -0.65"
+        width="0.25" height="0.16" depth="0.38">
+      </a-box>
+
+      <a-box
+        mixin="carton"
+        position="0.19 0.1 -0.65"
+        width="0.25" height="0.16" depth="0.38">
+      </a-box>
+
+      <!-- Brazos a los lados y antebrazos abrazando las rodillas -->
+      <a-box
+        mixin="carton"
+        position="-0.35 0.7 -0.27"
+        rotation="-48 0 -8"
+        width="0.16" height="0.46" depth="0.18">
+      </a-box>
+
+      <a-box
+        mixin="carton"
+        position="0.35 0.7 -0.27"
+        rotation="-48 0 8"
+        width="0.16" height="0.46" depth="0.18">
+      </a-box>
+
+      <a-box
+        mixin="carton"
+        position="-0.17 0.57 -0.56"
+        rotation="0 0 -8"
+        width="0.4" height="0.15" depth="0.17">
+      </a-box>
+
+      <a-box
+        mixin="carton"
+        position="0.17 0.57 -0.58"
+        rotation="0 0 8"
+        width="0.4" height="0.15" depth="0.17">
+      </a-box>
+
+      <!-- Juntas visibles en la espalda -->
+      <a-entity position="0 0.65 -0.08" rotation="-14 0 0">
+        <a-box
+          mixin="canto"
+          position="0 0.12 0.164"
+          width="0.55" height="0.008" depth="0.006">
+        </a-box>
+
+        <a-box
+          mixin="canto"
+          position="0 -0.12 0.164"
+          width="0.55" height="0.008" depth="0.006">
+        </a-box>
+
+        <a-box
+          mixin="canto"
+          position="0.13 0 0.164"
+          width="0.008" height="0.62" depth="0.006">
+        </a-box>
+
+
+ <a-text
+        value="¿Quien es?"
+        position="-2 1 0" rotation="0 45 0" 
+        align="center"
+        color="#027DCF"
+        width="6"> </a-text>
+ <a-text
+        value="¿Que siente?"
+        position="0 1 -1"  
+        align="center"
+        color="#BA00A5"
+        width="6"></a-text>
+
+  <a-text
+        value="¿Que le dirias?"
+        position="2 1 0" rotation="0 -45 0"
+        align="center"
+        color="#CF024A"
+        width="6"></a-text>
+             
+      
+
+      </a-entity>
+    </a-entity>
+
+    <!-- Luz suave y sombra que ancla la figura al suelo -->
+    <a-light
+      type="ambient"
+      color="#F4F2FF"
+      intensity="1.1">
+    </a-light>
+
+    <a-light
+      type="directional"
+      position="-3 9 1"
+      light="intensity: 2; castShadow: true;
+             shadowMapWidth: 2048; shadowMapHeight: 2048;
+             shadowCameraLeft: -5; shadowCameraRight: 5;
+             shadowCameraTop: 5; shadowCameraBottom: -5;
+             shadowBias: -0.0005">
+    </a-light>
+
+    <!-- Punto de vista elevado, mirando ligeramente hacia abajo -->
+    <a-entity position="3 2.5 30" rotation="-16 7 0"></a-entity>
+    <a-entity
+    camera
+    position="2 2.5 20"
+    rotation="0 45 0"
+    look-controls="pointerLockEnabled: false"
+    wasd-controls="acceleration: 15; fly: false">
+  </a-entity>
+    
+  </a-scene>
+</body>
+</html>
