@@ -187,13 +187,19 @@ dur: 200; startEvents: mouseleave"
 </a-entity>  
 
      <a-entity
-  gltf-model="#mochila 2"
+  gltf-model="#mochila 2" nimation__enter="property: position; to: 1.3 1.3 -0.6;
+dur: 200; startEvents: mouseenter"
+animation__leave="property: position; to: 1.3 1 -0.6;
+dur: 200; startEvents: mouseleave"
   position="1.3 1 -0.6" rotation="0 -165 0"
   scale="1.4 1.2 1.3">
 </a-entity>  
 
        <a-entity
-  gltf-model="#foto 1"
+  gltf-model="#foto 1" nimation__enter="property: position; to: -1.3 1.3 -3;
+dur: 200; startEvents: mouseenter"
+animation__leave="property: position; to: -1.3 1 -3;
+dur: 200; startEvents: mouseleave"
   position="-1.3 1 -3" rotation="0 -45 0"
   scale="1.5 1.5 1.5">
 </a-entity>  
