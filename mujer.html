@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La figura de cartón</title>
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+</head>
+
+<body>
+  <a-scene
+    background="color: #8799AA"
+    fog="type: linear; color: #8799AA; near: 18; far: 45"
+    renderer="antialias: true"
+    shadow="type: pcfsoft">
+
+    <a-assets>
+      <!-- Colores y superficies mates -->
+      <a-mixin
+        id="carton"
+        material="color: #AF895D; roughness: 1; metalness: 0"
+        shadow="cast: true; receive: true">
+      </a-mixin>
+
+      <a-mixin
+        id="carton-claro"
+        material="color: #C6A477; roughness: 1; metalness: 0"
+        shadow="cast: true; receive: true">
+      </a-mixin>
+
+      <a-mixin
+        id="carton-oscuro"
+        material="color: #654A30; roughness: 1; metalness: 0">
+      </a-mixin>
+    </a-assets>
+
+    <!-- FIGURA: frente orientado hacia +Z -->
+    <a-entity position="-0.8 0 -5">
+
+      <!-- Vestido ancho y facetado -->
+      <a-cone
+        mixin="carton"
+        position="0 1.7 0"
+        radius-bottom="1.4"
+        radius-top="0.65"
+        height="3.4"
+        segments-radial="9">
+      </a-cone>
+
+      <!-- Parches superpuestos del vestido -->
+      <a-box mixin="carton-claro"
+        position="-0.42 1.3 1.02"
+        rotation="-12 0 -8"
+        width="0.62" height="1.2" depth="0.045">
+      </a-box>
+
+      <a-box mixin="carton"
+        position="0.3 2.15 0.85"
+        rotation="-12 0 9"
+        width="0.68" height="0.8" depth="0.05">
+      </a-box>
+
+      <a-box mixin="carton-oscuro"
+        position="0.23 0.65 1.23"
+        rotation="-12 0 4"
+        width="0.035" height="1.15" depth="0.035">
+      </a-box>
+
+      <!-- Torso y cintura -->
+      <a-box mixin="carton"
+        position="0 3.65 0"
+        width="1.35" height="1.15" depth="0.75">
+      </a-box>
+
+      <a-box mixin="carton-claro"
+        position="0 3.2 0.42"
+        width="1.4" height="0.16" depth="0.08">
+      </a-box>
+
+      <a-box mixin="carton-claro"
+        position="-0.32 3.85 0.41"
+        rotation="0 0 -12"
+        width="0.5" height="0.6" depth="0.06">
+      </a-box>
+
+      <!-- Cuello -->
+      <a-cylinder mixin="carton"
+        position="0 4.4 0"
+        radius="0.22" height="0.4"
+        segments-radial="8">
+      </a-cylinder>
+
+      <!-- Cabeza -->
+      <a-entity position="0 5.02 0" rotation="10 0 0">
+
+        <a-sphere mixin="carton-claro"
+          radius="0.57"
+          scale="0.8 1.18 0.78"
+          segments-width="10"
+          segments-height="8">
+        </a-sphere>
+
+        <!-- Nariz -->
+        <a-cone mixin="carton"
+          position="0 0 0.46"
+          rotation="90 0 0"
+          radius-bottom="0.1"
+          radius-top="0.025"
+          height="0.22"
+          segments-radial="4">
+        </a-cone>
+
+        <!-- Ojos -->
+        <a-box mixin="carton-oscuro"
+          position="-0.19 0.15 0.405"
+          width="0.14" height="0.045" depth="0.035">
+        </a-box>
+
+        <a-box mixin="carton-oscuro"
+          position="0.19 0.15 0.405"
+          width="0.14" height="0.045" depth="0.035">
+        </a-box>
+
+        <!-- Cejas -->
+        <a-box mixin="carton"
+          position="-0.19 0.25 0.4"
+          rotation="0 0 8"
+          width="0.2" height="0.04" depth="0.04">
+        </a-box>
+
+        <a-box mixin="carton"
+          position="0.19 0.25 0.4"
+          rotation="0 0 -8"
+          width="0.2" height="0.04" depth="0.04">
+        </a-box>
+
+        <!-- Boca -->
+        <a-box mixin="carton-oscuro"
+          position="0 -0.25 0.4"
+          width="0.21" height="0.025" depth="0.025">
+        </a-box>
+
+        <!-- Cabello en tiras de cartón -->
+        <a-box mixin="carton-oscuro"
+          position="0 0.5 -0.08"
+          width="0.82" height="0.18" depth="0.65">
+        </a-box>
+
+        <a-box mixin="carton"
+          position="-0.47 0 -0.02"
+          rotation="0 0 -12"
+          width="0.17" height="1.4" depth="0.25">
+        </a-box>
+
+        <a-box mixin="carton-oscuro"
+          position="-0.58 -0.22 -0.12"
+          rotation="0 0 -19"
+          width="0.13" height="1.35" depth="0.22">
+        </a-box>
+
+        <a-box mixin="carton"
+          position="0.47 0 -0.02"
+          rotation="0 0 12"
+          width="0.18" height="1.4" depth="0.25">
+        </a-box>
+
+        <a-box mixin="carton-oscuro"
+          position="0.58 -0.22 -0.12"
+          rotation="0 0 19"
+          width="0.12" height="1.35" depth="0.22">
+        </a-box>
+
+        <a-box mixin="carton"
+          position="0 -0.1 -0.43"
+          width="0.85" height="1.25" depth="0.15">
+        </a-box>
+      </a-entity>
+
+      <!-- Brazo izquierdo junto al cuerpo -->
+      <a-box mixin="carton"
+        position="-0.92 3.35 0"
+        rotation="0 0 -16"
+        width="0.4" height="1.55" depth="0.45">
+      </a-box>
+
+      <!-- Brazo derecho extendido hacia el espectador -->
+      <a-entity position="0.83 3.9 0.12" rotation="12 18 0">
+
+        <a-cylinder mixin="carton"
+          position="0 0 0.72"
+          rotation="90 0 0"
+          radius="0.27" height="1.45"
+          segments-radial="8">
+        </a-cylinder>
+
+        <a-cylinder mixin="carton-claro"
+          position="0 -0.03 1.75"
+          rotation="90 0 0"
+          radius="0.22" height="0.85"
+          segments-radial="8">
+        </a-cylinder>
+
+        <!-- Mano abierta: palma hacia la cámara -->
+        <a-entity position="0 -0.05 2.5" rotation="0 0 -18">
+
+          <a-box mixin="carton"
+            width="0.85" height="0.95" depth="0.28">
+          </a-box>
+
+          <!-- Parches de la palma -->
+          <a-box mixin="carton-claro"
+            position="-0.16 0.05 0.155"
+            rotation="0 0 12"
+            width="0.3" height="0.6" depth="0.025">
+          </a-box>
+
+          <a-box mixin="carton-oscuro"
+            position="0.12 -0.08 0.16"
+            rotation="0 0 -15"
+            width="0.018" height="0.58" depth="0.015">
+          </a-box>
+
+          <!-- Cuatro dedos separados -->
+          <a-box mixin="carton"
+            position="-0.37 0.85 0"
+            rotation="0 0 16"
+            width="0.18" height="0.95" depth="0.23">
+          </a-box>
+
+          <a-box mixin="carton-claro"
+            position="-0.1 1 0"
+            rotation="0 0 4"
+            width="0.19" height="1.12" depth="0.24">
+          </a-box>
+
+          <a-box mixin="carton"
+            position="0.2 0.92 0"
+            rotation="0 0 -10"
+            width="0.18" height="1.02" depth="0.23">
+          </a-box>
+
+          <a-box mixin="carton"
+            position="0.48 0.7 0"
+            rotation="0 0 -25"
+            width="0.16" height="0.8" depth="0.21">
+          </a-box>
+
+          <!-- Pulgar -->
+          <a-box mixin="carton-claro"
+            position="-0.65 -0.1 0.03"
+            rotation="0 0 -55"
+            width="0.23" height="0.75" depth="0.25">
+          </a-box>
+        </a-entity>
+      </a-entity>
+    </a-entity>
+
+    <!-- Nubes como recortes gruesos de cartón -->
+    <a-entity position="-5 7 -10">
+      <a-sphere mixin="carton"
+        scale="1.6 0.65 0.15" segments-width="12">
+      </a-sphere>
+      <a-sphere mixin="carton"
+        position="-0.7 0.4 0"
+        scale="0.7 0.7 0.15" segments-width="12">
+      </a-sphere>
+      <a-sphere mixin="carton"
+        position="0.5 0.4 0"
+        scale="0.8 0.85 0.15" segments-width="12">
+      </a-sphere>
+    </a-entity>
+
+    <a-entity position="5 7.5 -12" scale="1.5 1.5 1">
+      <a-sphere mixin="carton-claro"
+        scale="1.6 0.65 0.15" segments-width="12">
+      </a-sphere>
+      <a-sphere mixin="carton-claro"
+        position="-0.6 0.4 0"
+        scale="0.8 0.8 0.15" segments-width="12">
+      </a-sphere>
+      <a-sphere mixin="carton-claro"
+        position="0.5 0.35 0"
+        scale="0.7 0.65 0.15" segments-width="12">
+      </a-sphere>
+    </a-entity>
+
+    <!-- Suelo -->
+    <a-plane
+      rotation="-90 0 0"
+      width="80" height="80"
+      color="#89755E"
+      material="roughness: 1"
+      shadow="receive: true">
+    </a-plane>
+
+    <!-- Luz cálida lateral -->
+    <a-light type="ambient" color="#C3CCD8" intensity="0.65">
+    </a-light>
+
+    <a-entity
+      position="-4 8 5"
+      light="type: directional;
+             color: #FFE0AD;
+             intensity: 2;
+             castShadow: true;
+             shadowMapWidth: 2048;
+             shadowMapHeight: 2048;
+             shadowCameraLeft: -10;
+             shadowCameraRight: 10;
+             shadowCameraTop: 10;
+             shadowCameraBottom: -10">
+    </a-entity>
+
+    <!-- Cámara baja: vista en contrapicado -->
+    <a-entity
+      camera="fov: 70"
+      position="0 0.8 2"
+      rotation="25 0 0"
+      look-controls="pointerLockEnabled: false"
+      wasd-controls="acceleration: 10">
+    </a-entity>
+
+  </a-scene>
+</body>
+</html>
